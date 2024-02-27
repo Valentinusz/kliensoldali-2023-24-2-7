@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-
 </head>
 <body>
     <style>
@@ -19,7 +17,7 @@
     </style>
 
     <div class="error">
-asdasdsada
+        asdasdsada
     </div>
 
     <template id="textarea-template">
@@ -29,6 +27,12 @@ asdasdsada
             }
         </style>
 
+        <!-- slot -->
+        <!-- speciális html elem, ami template-be ágyazható -->
+        <!-- két dologra használható: -->
+        <!-- ablak ki a shadow domból -->
+        <!-- rugalmas tartalmú elemek esetén a gyerek elemek helyének definiálása -->
+        <!-- probléma ha ablalkként használjuk megtöri az enkapszulációt -->
         <slot name="textarea"></slot>
         <span><span class="char-count">0</span> karakter</span>
     </template>

@@ -6,26 +6,33 @@
     <title>Document</title>
 </head>
 <body>
-    <button></button>
+    <!-- Template speciális elem -->
+    <!-- Nem jeleneik meg a dokumentumba de a memóriában benne van -->
+    <!-- Hatékonyan lemásolható -->
+    <!-- Deklaratív -->
     <template id="interval-input">
+        <!-- Akár stílust is megadhatunk -->
+        <!-- De ez dokumentum szinten érvényes lesz -->
+        <!-- Nincs enkapszulálva, kiszivárog a CSS -> később probléma lehet -->
+        <style>
+            .error {
+                background-color: red;
+            }
+        </style>
+
         <input type="date" name="datum[]">
         <input type="time" name="tol[]">
         <input type="time" name="ig[]">
     </template>
 
     <template id="interval-input-group">
-        <style>
-            button {
-                background-color: red;
-            }
-        </style>
-
         <button type="button">+</button>
     </template>
 
+    
     <form action="">
-        <interval-input-group>
-        </interval-input-group>
+        <interval-input-group></interval-input-group>
+        <button></button>
     </form>
     <script src="script.js"></script>
 </body>

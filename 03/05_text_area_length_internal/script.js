@@ -1,4 +1,5 @@
 class TextAreaWithLength extends HTMLElement {
+    // ha ez jelen van állítható válik mi küldődjön el ha az elem űrlapbban van
     static formAssociated = true;
     static #template = document.querySelector('template#textarea-template')
 
@@ -6,9 +7,9 @@ class TextAreaWithLength extends HTMLElement {
         super();
 
         const shadowRoot = this.attachShadow({mode: 'closed'});
-        const internals = this.attachInternals();
 
-        console.log(internals);
+        // az űrlapérték állítása az internals objektumon keresztül állítható
+        const internals = this.attachInternals();
 
         shadowRoot.append(TextAreaWithLength.#template.content.cloneNode(true));
 
@@ -24,6 +25,7 @@ class TextAreaWithLength extends HTMLElement {
 
             charSpan.classList.toggle('error', textarea.value.length > 25)
 
+            // setForm állítja be
             internals.setFormValue(textarea.value)
         })
     }

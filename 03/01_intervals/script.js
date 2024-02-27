@@ -1,4 +1,6 @@
 class IntervalInput extends HTMLElement {
+    // static - osztályszintű
+    // # - privát
     /**
      * @type {HTMLTemplateElement}
      */
@@ -7,9 +9,20 @@ class IntervalInput extends HTMLElement {
     constructor() {
         super();
 
-        console.log(IntervalInput.#template);
-
+        // template tartalma a content adattagon keresztül érhető el
+        // cloneNode lemásolja
+        // true: mély másolat (szinte mindig az kell)
         this.append(IntervalInput.#template.content.cloneNode(true));
+
+        const from = this.querySelector('input[name="tol[]"]');
+        const to = this.querySelector('input[name="ig[]"]');
+        
+        this.addEventListener('input', () => {
+            const error = to.value !== "" && from.value !== "" && to.value <= from.value;
+
+            from.classList.toggle('error', error);
+            to.classList.toggle('error', error);
+        })
     }
 }
 
@@ -26,14 +39,13 @@ class IntervalInputGroup extends HTMLElement {
         super();
 
         this.append(IntervalInputGroup.#template.content.cloneNode(true));
-
         this.querySelector('button').addEventListener('click', this.add);
     }
 
+    // eseménykezelőként hozzáadás leköti a this-t
+    // kivéve ha az eseménykezelőként hozzáadott függvény arrow function
     add = () => {
         const interval = new IntervalInput();
-
-        interval.slot = "content";
 
         this.append(interval);
     }
