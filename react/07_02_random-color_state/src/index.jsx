@@ -6,10 +6,9 @@ import RandomColorDiv from "./RandomColorDiv";
 const container = document.getElementById("root");
 const root = createRoot(container);
 
-setInterval(() => {
-  root.render(
-    <React.StrictMode>
-      <RandomColorDiv>aaasdaasds</RandomColorDiv>
-    </React.StrictMode>
-  );
-}, 1000);
+root.render(
+  <React.StrictMode>
+    <RandomColorDiv>aaasdaasds</RandomColorDiv>
+    <RandomColorDiv>aaasdaassssssds</RandomColorDiv>
+  </React.StrictMode>
+);

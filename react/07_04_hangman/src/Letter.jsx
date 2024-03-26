@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 const Letter = ({ missing, visible, children }) => (
   <span className={cn({ hianyzo: missing })}>{visible && children}</span>
 );
+
 Letter.propTypes = {
   missing: PropTypes.string.isRequired,
   visible: PropTypes.bool.isRequired,

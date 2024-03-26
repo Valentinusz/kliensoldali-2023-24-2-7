@@ -1,6 +1,4 @@
-const Hangman = () => {
-  const wrong = 3;
-
+const Hangman = ({ wrong }) => {
   const parts = [
     <line x1="0" y1="99%" x2="100%" y2="99%" key={1} />,
     <line x1="20%" y1="99%" x2="20%" y2="5%" key={2} />,

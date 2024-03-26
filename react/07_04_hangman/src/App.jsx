@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Buttons from "./Buttons";
 import Hangman from "./Hangman";
 import Result from "./Result";
@@ -6,29 +7,56 @@ import { wordList } from "https://cdn.jsdelivr.net/gh/vimtaai/elte-efop-feladatt
 
 const random = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
 
+function generateWord() {
+  return wordList[random(0, wordList.length)];
+}
+
+function getMaxTips() {
+  return 9;
+}
+
 const App = () => {
   // Application state (data)
-  const maxTips = 9;
-  const word = "alma";
-  const tips = ["a", "l", "s", "s", "s", "s", "s", "s", "s"];
-  const buttonText = "aábcdeéfghiíjklmnoóöőpqrstuúüűvwxyz";
+  const [maxTips, setMaxTips] = useState(getMaxTips());
+  const [word, setWord] = useState(generateWord());
+  const [tips, setTips] = useState([]);
 
   // Event handlers
+  const makeTip = (letter) => {
+    console.log(letter);
+    // tips.push(letter);
+
+    setTips([...tips, letter]);
+  };
+
+  const newGame = () => {
+    setWord(generateWord());
+    setTips([]);
+    setMaxTips(getMaxTips());
+  };
 
   // Computed values
+  const won = () => word.split("").every((letter) => tips.includes(letter));
+  const wrongCount = tips.filter((letter) => !word.includes(letter)).length;
+  const isOver = won || wrongCount >= maxTips;
+
+  console.log(isOver);
 
   return (
     <>
       <h1>Hangman</h1>
 
-      <Word />
+      <Word won={won} word={word} tips={tips} isOver={isOver} />
 
-      <button>New game</button>
-      <Buttons />
+      {isOver ? (
+        <button onClick={newGame}>New game</button>
+      ) : (
+        <Buttons tips={tips} handleClick={makeTip} isOver={isOver} />
+      )}
 
-      <Result />
+      <Result wrong={wrongCount} maxTips={maxTips} />
 
-      <Hangman />
+      <Hangman wrong={wrongCount} />
     </>
   );
 };

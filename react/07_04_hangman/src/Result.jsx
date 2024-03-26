@@ -1,6 +1,4 @@
-const Result = () => {
-  const wrong = 3;
-  const maxTips = 9;
+const Result = ({ wrong, maxTips }) => {
   return (
     <div id="eredmeny">
       {wrong}/{maxTips}
